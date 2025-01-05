@@ -613,21 +613,26 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Initialize clients
-anthropic_client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
-pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
-index = pc.Index(os.getenv("PINECONE_INDEX_NAME"))
+try:
+    anthropic = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+    openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+    pc = Pinecone(
+        api_key=os.getenv("PINECONE_API_KEY"),
+        environment=os.getenv("PINECONE_ENVIRONMENT")
+    )
+    index = pc.Index(os.getenv("PINECONE_INDEX_NAME"))
+except Exception as e:
+    st.error(f"Error initializing clients: {str(e)}")
+    raise
 
 def create_embedding(text: str) -> List[float]:
     """Create embedding using OpenAI's text-embedding-3-small."""
-    import openai
-    openai.api_key = os.getenv("OPENAI_API_KEY")
-    
     try:
-        response = openai.Embedding.create(
+        response = openai_client.embeddings.create(
             input=text,
-            model=os.getenv("OPENAI_EMBEDDING_MODEL")  # Will use text-embedding-3-small from .env
+            model=os.getenv("OPENAI_EMBEDDING_MODEL")
         )
-        return response['data'][0]['embedding']
+        return response.data[0].embedding
     except Exception as e:
         print(f"Error creating embedding: {str(e)}")
         raise
@@ -658,7 +663,7 @@ Please synthesize the information and provide a clear, well-structured response.
 
 Response:"""
 
-    response = anthropic_client.messages.create(
+    response = anthropic.messages.create(
         model=os.getenv("ANTHROPIC_MODEL"),
         max_tokens=1000,
         temperature=0.7,
