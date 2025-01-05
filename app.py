@@ -613,7 +613,6 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Initialize clients
-openai_client = OpenAI()
 anthropic_client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 pc = Pinecone(
     api_key=os.getenv("PINECONE_API_KEY"),
@@ -625,7 +624,11 @@ index = pc.Index(os.getenv("PINECONE_INDEX_NAME"))
 
 def create_embedding(text: str) -> List[float]:
     """Create embedding using OpenAI's text-embedding-3-small."""
-    response = openai_client.embeddings.create(
+    client = OpenAI(
+        api_key=os.getenv("OPENAI_API_KEY"),
+        base_url="https://api.openai.com/v1"
+    )
+    response = client.embeddings.create(
         input=text,
         model=os.getenv("OPENAI_EMBEDDING_MODEL")
     )
