@@ -621,12 +621,13 @@ try:
         environment=os.getenv("PINECONE_ENVIRONMENT")
     )
     index = pc.Index(os.getenv("PINECONE_INDEX_NAME"))
+    st.info("Successfully initialized all clients")
 except Exception as e:
     st.error(f"Error initializing clients: {str(e)}")
     raise
 
 def create_embedding(text: str) -> List[float]:
-    """Create embedding using OpenAI's text-embedding-3-small."""
+    """Create embedding using OpenAI's API."""
     try:
         response = openai_client.embeddings.create(
             input=text,
@@ -634,7 +635,7 @@ def create_embedding(text: str) -> List[float]:
         )
         return response.data[0].embedding
     except Exception as e:
-        print(f"Error creating embedding: {str(e)}")
+        st.error(f"Error creating embedding: {str(e)}")
         raise
 
 def get_ai_response(query: str, results: list) -> str:
