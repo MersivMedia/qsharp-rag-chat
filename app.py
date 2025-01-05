@@ -19,6 +19,17 @@ st.markdown("""
         background-color: #0a0f18 !important;
     }
     
+    /* Hide default Streamlit header/footer */
+    header[data-testid="stHeader"] {
+        background-color: #0a0f18 !important;
+        color: #ffffff !important;
+    }
+    
+    /* Hide viewport meta tag from displaying */
+    meta[name="viewport"] {
+        display: none !important;
+    }
+    
     /* Chat input placeholder color */
     .stChatInput textarea::placeholder {
         color: #00b4ff !important;
@@ -35,32 +46,74 @@ st.markdown("""
         background-color: #141c2b !important;
         border: 1px solid #00b4ff !important;
         box-shadow: 0 0 10px rgba(0, 180, 255, 0.1) !important;
-        width: 90% !important;  /* Changed from fixed width to responsive */
-        max-width: 650px !important;  /* Added max-width */
+        width: 90% !important;
+        max-width: 650px !important;
         margin: 0 auto !important;
-        padding: 10px !important;  /* Adjusted padding */
+        padding: 10px !important;
     }
     
-    /* Chat input styling */
+    /* Chat input container positioning */
     section[data-testid="stChatInput"] {
         position: fixed !important;
-        bottom: 80px !important;  /* Adjusted for mobile */
+        bottom: 180px !important;  /* Increased significantly from 140px to 180px */
         left: 0 !important;
         right: 0 !important;
-        background-color: #0a0a0a !important;
+        background-color: #0a0f18 !important;
         padding: 10px 0 !important;
         z-index: 999 !important;
     }
     
-    /* Control text input width */
-    .stChatInput > div {
-        width: 90% !important;  /* Changed from fixed width to responsive */
+    /* Chat input styling */
+    .stChatInput {
+        width: 90% !important;
         max-width: 650px !important;
         margin: 0 auto !important;
         padding: 0 !important;
+        background-color: #141c2b !important;
     }
     
-    /* Footer styling */
+    /* Input field container */
+    .stChatInput > div {
+        padding-right: 40px !important;  /* Make room for send button */
+    }
+    
+    /* Input textarea */
+    .stChatInput textarea {
+        background-color: #141c2b !important;
+        border: 1px solid #00b4ff !important;
+        padding: 8px !important;
+        margin: 0 !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        color: #00b4ff !important;  /* Match the quantum blue color */
+    }
+    
+    /* Send button positioning */
+    .stChatInput button {
+        right: 8px !important;  /* Adjust button position */
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        section[data-testid="stChatInput"] {
+            bottom: 180px !important;  /* Match desktop value */
+        }
+        
+        .stChatInput {
+            width: 95% !important;
+        }
+    }
+    
+    /* Control text input width */
+    .stChatInput > div {
+        width: 90% !important;
+        max-width: 650px !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        background-color: #141c2b !important;  /* Match chat message background */
+    }
+    
+    /* Footer positioning */
     .footer {
         position: fixed;
         bottom: 0;
@@ -103,35 +156,77 @@ st.markdown("""
         font-size: 0.8rem;
     }
     
-    /* Responsive adjustments */
+    /* Ensure all backgrounds are dark */
+    div.stChatFloatingInputContainer, 
+    div.stChatInputContainer {
+        background-color: #0a0f18 !important;
+    }
+    
+    /* Target any potential white backgrounds */
+    div[class*="stChatInput"] {
+        background-color: #0a0f18 !important;
+    }
+    
+    /* Ensure the input area itself has the correct background */
+    .stChatInput > div > textarea {
+        background-color: #141c2b !important;
+    }
+    
+    /* Fix the white bottom container and add padding */
+    .stBottom, div[data-testid="stBottom"] {
+        background-color: #0a0f18 !important;
+        padding-bottom: 10px !important;  /* Add significant bottom padding */
+        margin-bottom: 30px !important;    /* Add some margin as well */
+    }
+    
+    /* Ensure the padding is maintained on mobile */
     @media (max-width: 768px) {
-        .stChatMessage, .stChatInput {
-            width: 95% !important;
-            padding: 8px !important;
-        }
-        
-        section[data-testid="stChatInput"] {
-            bottom: 60px !important;
-        }
-        
-        .footer {
-            padding: 5px;
-        }
-        
-        .social-icons {
-            gap: 10px;
-        }
-        
-        .social-icons a {
-            width: 20px;
-            height: 20px;
+        .stBottom, div[data-testid="stBottom"] {
+            padding-bottom: 10px !important;
+            margin-bottom: 30px !important;
         }
     }
     
-    /* Add viewport meta tag for mobile */
-    </style>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    /* Adjust the Got it! button position */
+    @media (max-width: 768px) {
+        .element-container:has([data-testid="stButton"]) {
+            transform: translate(-50%, 120px) !important;  /* Reduced from 180px to 160px */
+        }
+    }
+    
+    /* Ensure all backgrounds are dark */
+    div.stChatFloatingInputContainer, 
+    div.stChatInputContainer,
+    div[class*="stChatInput"],
+    div[class*="st-emotion-cache"] {
+        background-color: #0a0f18 !important;
+    }
+    
+    /* Hide sidebar */
+    [data-testid="stSidebar"] {
+        display: none !important;
+    }
+    
+    /* Hide sidebar trigger button */
+    button[kind="header"] {
+        display: none !important;
+    }
+    
+    /* Hide any remaining sidebar elements */
+    .st-emotion-cache-1q1n0ol {
+        display: none !important;
+    }
+    
+    /* Chat input placeholder color */
+    .stChatInput textarea::placeholder {
+        color: #00b4ff !important;
+        opacity: 0.7 !important;  /* Make placeholder slightly transparent */
+    }
+</style>
 """, unsafe_allow_html=True)
+
+# Add viewport meta tag separately so it's not visible
+st.markdown('<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">', unsafe_allow_html=True)
 
 # Initialize clients
 try:
@@ -291,7 +386,7 @@ def show_disclaimer():
                             z-index: 1000003 !important;
                             top: 50%;
                             left: 50%;
-                            transform: translate(-50%, 80px);
+                            transform: translate(-50%, 100px);  /* Increased from 80px to 120px */
                             width: auto !important;
                             text-align: center !important;
                             display: flex !important;
@@ -313,6 +408,13 @@ def show_disclaimer():
                             display: inline-block !important;
                             width: auto !important;
                             margin: 0 auto !important;
+                        }
+
+                        /* Additional mobile adjustments */
+                        @media (max-width: 768px) {
+                            .element-container:has([data-testid="stButton"]) {
+                                transform: translate(-50%, 180px);  /* Even more space on mobile */
+                            }
                         }
                     </style>
                 """, unsafe_allow_html=True)
@@ -403,10 +505,6 @@ def main():
         <a href="https://mersivmedia.com" target="_blank">Made by Mersiv Media</a>
     </div>
     """, unsafe_allow_html=True)
-
-    # Add a help button in the sidebar
-    if st.sidebar.button("❔ Help"):
-        show_disclaimer()
 
 if __name__ == "__main__":
     main() 
