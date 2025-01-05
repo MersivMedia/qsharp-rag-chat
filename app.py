@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 from pinecone import Pinecone
-from openai import OpenAI
+import openai  # Import the module instead of the class
 from anthropic import Anthropic
 from typing import List, Dict, Any
 import streamlit as st
@@ -615,7 +615,10 @@ st.markdown("""
 # Initialize clients
 try:
     anthropic = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
-    openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+    
+    # Set OpenAI API key
+    openai.api_key = os.getenv("OPENAI_API_KEY")
+    
     pc = Pinecone(
         api_key=os.getenv("PINECONE_API_KEY"),
         environment=os.getenv("PINECONE_ENVIRONMENT")
@@ -629,11 +632,11 @@ except Exception as e:
 def create_embedding(text: str) -> List[float]:
     """Create embedding using OpenAI's API."""
     try:
-        response = openai_client.embeddings.create(
+        response = openai.Embedding.create(
             input=text,
             model=os.getenv("OPENAI_EMBEDDING_MODEL")
         )
-        return response.data[0].embedding
+        return response['data'][0]['embedding']
     except Exception as e:
         st.error(f"Error creating embedding: {str(e)}")
         raise
