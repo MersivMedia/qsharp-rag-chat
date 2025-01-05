@@ -624,7 +624,6 @@ try:
         environment=os.getenv("PINECONE_ENVIRONMENT")
     )
     index = pc.Index(os.getenv("PINECONE_INDEX_NAME"))
-    st.info("Successfully initialized all clients")
 except Exception as e:
     st.error(f"Error initializing clients: {str(e)}")
     raise
