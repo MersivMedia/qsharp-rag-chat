@@ -619,14 +619,15 @@ index = pc.Index(os.getenv("PINECONE_INDEX_NAME"))
 
 def create_embedding(text: str) -> List[float]:
     """Create embedding using OpenAI's text-embedding-3-small."""
-    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))  # Simplest possible initialization
+    import openai
+    openai.api_key = os.getenv("OPENAI_API_KEY")
     
     try:
-        response = client.embeddings.create(
+        response = openai.Embedding.create(
             input=text,
-            model=os.getenv("OPENAI_EMBEDDING_MODEL")
+            model=os.getenv("OPENAI_EMBEDDING_MODEL")  # Will use text-embedding-3-small from .env
         )
-        return response.data[0].embedding
+        return response['data'][0]['embedding']
     except Exception as e:
         print(f"Error creating embedding: {str(e)}")
         raise
