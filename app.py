@@ -35,581 +35,102 @@ st.markdown("""
         background-color: #141c2b !important;
         border: 1px solid #00b4ff !important;
         box-shadow: 0 0 10px rgba(0, 180, 255, 0.1) !important;
-        width: 650px !important;  /* Set fixed width for both */
+        width: 90% !important;  /* Changed from fixed width to responsive */
+        max-width: 650px !important;  /* Added max-width */
         margin: 0 auto !important;
-        padding-right: 20px !important;  /* Add more padding on right side */
+        padding: 10px !important;  /* Adjusted padding */
     }
     
     /* Chat input styling */
     section[data-testid="stChatInput"] {
         position: fixed !important;
-        bottom: 100px !important;
+        bottom: 80px !important;  /* Adjusted for mobile */
         left: 0 !important;
         right: 0 !important;
         background-color: #0a0a0a !important;
-        padding: 0 !important;
+        padding: 10px 0 !important;
         z-index: 999 !important;
     }
     
     /* Control text input width */
     .stChatInput > div {
-        width: 650px !important;  /* Match chat message width */
+        width: 90% !important;  /* Changed from fixed width to responsive */
+        max-width: 650px !important;
         margin: 0 auto !important;
         padding: 0 !important;
     }
     
-    /* Ensure the text input itself is properly contained */
-    .stChatInput textarea {
-        width: 100% !important;
-        box-sizing: border-box !important;
-        color: #ffffff !important;
-        background-color: #141c2b !important;
-        border: 1px solid #00b4ff !important;
-        padding: 8px 12px !important;
-    }
-    
-    /* Container for the input background */
-    div[data-testid="stChatInputContainer"] {
-        width: 650px !important;  /* Match chat message width */
-        margin: 0 auto !important;
-        padding: 0 !important;
-    }
-    
-    /* Style placeholder text */
-    .stChatInput textarea::placeholder {
-        color: #00b4ff !important;
-        opacity: 0.7 !important;
-    }
-    
-    /* Remove white background from chat container */
-    .stChatContainer, div[data-testid="stChatMessageInput"] {
-        background-color: #0a0a0a !important;
-    }
-    
-    /* Buttons and interactive elements */
-    .stButton>button {
-        background-color: #141c2b !important;
-        color: #00b4ff !important;
-        border: 1px solid #00b4ff !important;
-    }
-    
-    /* Expandable sections */
-    .streamlit-expanderHeader {
-        background-color: #1a1a1a !important;
-        color: #00ff00 !important;
-        border: 1px solid #00ff00 !important;
-    }
-    
-    /* Headers */
-    h1, h2, h3, [data-testid="stHeader"] {
-        color: #ffffff !important;
-        text-shadow: 0 0 10px rgba(0, 180, 255, 0.3) !important;
-    }
-    
-    /* Center main title only */
-    .stApp > header + div [data-testid="stMarkdownContainer"] > div:first-child > h1 {
-        text-align: center !important;
-        width: 100% !important;
-        margin: 20px 0 !important;
-    }
-    
-    /* Spinner */
-    .stSpinner > div {
-        border-top-color: #00ff00 !important;
-    }
-    
-   
-    /* Disclaimer modal */
-    .disclaimer-modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0,0,0,0.8);
-        z-index: 999;
-    }
-    
-    .disclaimer-content {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: #141c2b;
-        padding: 2rem;
-        border: 2px solid #00b4ff;
-        border-radius: 10px;
-        z-index: 1000;
-        max-width: 600px;
-        text-align: center;
-        color: white;
-    }
-    
-    .disclaimer-content button {
-        background-color: #00b4ff;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-top: 20px;
-    }
-    
-    .disclaimer-content button:hover {
-        background-color: #0077ff;
-    }
-    
-    /* Sticky Footer */
+    /* Footer styling */
     .footer {
         position: fixed;
-        left: 0;
         bottom: 0;
-        width: 100%;
+        left: 0;
+        right: 0;
         background-color: #0a0f18;
-        color: #ffffff;
+        padding: 10px;
         text-align: center;
-        padding: 10px 0;
         border-top: 1px solid #00b4ff;
-        z-index: 998;
+        z-index: 1000;
     }
     
-    .footer a {
-        color: #00b4ff;
-        text-decoration: none;
-    }
-    
-    .footer a:hover {
-        text-decoration: underline;
-    }
-    
+    /* Social icons container */
     .social-icons {
         display: flex;
         justify-content: center;
-        gap: 20px;
+        gap: 15px;
         margin-bottom: 5px;
     }
     
-    .social-icons svg {
+    /* Social icons */
+    .social-icons a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         width: 24px;
         height: 24px;
+    }
+    
+    .social-icons svg {
         fill: #00b4ff;
-        transition: fill 0.3s ease;
+        width: 100%;
+        height: 100%;
     }
     
-    .social-icons a:hover svg {
-        fill: #66d9ff;
+    /* Footer link */
+    .footer a {
+        color: #00b4ff;
+        text-decoration: none;
+        font-size: 0.8rem;
     }
     
-    /* Add padding to main content to prevent footer overlap */
-    .main-content {
-        padding-bottom: 50px !important;
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .stChatMessage, .stChatInput {
+            width: 95% !important;
+            padding: 8px !important;
+        }
+        
+        section[data-testid="stChatInput"] {
+            bottom: 60px !important;
+        }
+        
+        .footer {
+            padding: 5px;
+        }
+        
+        .social-icons {
+            gap: 10px;
+        }
+        
+        .social-icons a {
+            width: 20px;
+            height: 20px;
+        }
     }
     
-    /* Adjust chat input position */
-    section[data-testid="stChatInput"] {
-        position: fixed !important;
-        bottom: 70px !important;
-        left: 0 !important;
-        right: 0 !important;
-        background-color: #0a0a0a !important;
-        padding: 20px !important;
-        z-index: 999 !important;
-    }
-    
-    /* Force black background on all chat-related elements */
-    .st-emotion-cache-128upt6,
-    .st-emotion-cache-12cetgn,
-    .st-emotion-cache-0,
-    .st-emotion-cache-b95f0i,
-    .st-emotion-cache-1n76uvr,
-    .st-emotion-cache-ke1f9q,
-    .st-emotion-cache-1wpj71q,
-    .st-emotion-cache-s1k4sy,
-    div[data-testid="stBottomBlockContainer"],
-    div[data-testid="stVerticalBlockBorderWrapper"],
-    .stVerticalBlock,
-    .stElementContainer {
-        background-color: #0a0f18 !important;
-    }
-
-    section[data-testid="stChatInput"] > div {
-        background-color: #0a0a0a !important;
-    }
-    
-    div[data-testid="stChatMessageInput"] > div {
-        background-color: #0a0a0a !important;
-    }
-    
-    /* Adjust main chat container to not overlap with fixed input */
-    .stChatContainer {
-        margin-bottom: 100px !important;
-        background-color: #0a0a0a !important;
-        overflow-y: auto !important;
-        height: auto !important;
-        min-height: 100vh !important;
-        padding: 0 20px !important;
-    }
-    
-    /* Ensure all backgrounds are black */
-    .stMarkdown, .stChatMessage, div[class*="stChatInput"] {
-        background-color: #0a0a0a !important;
-    }
-
-    /* Additional container styling */
-    div[data-testid="stBottomBlockContainer"] {
-        position: fixed !important;
-        bottom: 120px !important;
-        z-index: 998 !important;
-        width: 100% !important;
-    }
-
-    /* Ensure content is scrollable */
-    .main .block-container {
-        padding-bottom: 300px !important;
-        overflow-y: auto !important;
-        height: auto !important;
-    }
-
-    /* Style scrollbar */
-    ::-webkit-scrollbar {
-        width: 8px;
-        background-color: #0a0a0a;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background-color: #00b4ff;
-        border-radius: 4px;
-    }
-
-    ::-webkit-scrollbar-track {
-        background-color: #141c2b;
-    }
-
-    /* Ensure expandable sections are fully visible */
-    .streamlit-expanderContent {
-        background-color: #0a0a0a !important;
-        margin-bottom: 10px !important;
-    }
-
-    /* Main app container */
-    .stApp {
-        height: 100vh !important;
-        overflow-y: auto !important;
-        padding: 0 20px !important;
-    }
-
-    /* Chat message container */
-    .stChatMessage {
-        margin-bottom: 20px !important;
-    }
-
-    /* Message content */
-    .stMarkdown {
-        overflow: visible !important;
-    }
-
-    /* Ensure input container matches exact width */
-    div[data-testid="stBottomBlockContainer"] {
-        width: 650px !important;
-        margin: 0 auto !important;
-    }
-
-    /* Remove any flex spacing */
-    .stVerticalBlock {
-        gap: 0 !important;
-    }
-
-    /* Ensure chat message container aligns with input */
-    .stChatMessage {
-        margin-left: auto !important;
-        margin-right: auto !important;
-        box-sizing: border-box !important;
-    }
-
-    .stChatMessage {
-        padding-bottom: 3.5rem !important;  /* Increased padding below messages */
-    }
-    
-    /* Update placeholder text */
-    .stChatInput textarea::placeholder {
-        content: "Ask a question about q# coding" !important;
-    }
-
-    /* Make header dark */
-    header[data-testid="stHeader"] {
-        background-color: #0a0f18 !important;
-    }
-
-    /* Style header buttons and menu items */
-    .stDeployButton, 
-    button[kind="header"],
-    .stDecoration {
-        background-color: #141c2b !important;
-        color: #00b4ff !important;
-        border-color: #00b4ff !important;
-    }
-
-    /* Style dropdown menu */
-    div[data-testid="stToolbar"],
-    div[class*="stToolbar"] {
-        background-color: #0a0f18 !important;
-    }
-
-    [data-testid="collapsedControl"] {
-        display: none;
-    }
-    
-    section[data-testid="stSidebar"] {
-        display: none;
-    }
-    
-    /* Ensure the app takes full width */
-    .main > .block-container {
-        max-width: 100%;
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-
-    /* Adjust chat input position */
-    section[data-testid="stChatInput"] {
-        padding-bottom: 0.2rem !important;  /* Reduced space between input and footer */
-        position: fixed !important;
-        bottom: 2.5rem !important;  /* Moved closer to footer */
-        background: transparent !important;
-    }
-
-    /* Ensure messages don't get hidden behind input */
-    [data-testid="stChatMessageContainer"] {
-        padding-bottom: 9rem !important;  /* Increased padding to prevent cutoff */
-    }
-
-    /* Adjust main chat container height and position */
-    [data-testid="stChatMessageContainer"] {
-        height: calc(100vh - 180px) !important;  /* Reduced height to leave space for input */
-        overflow-y: auto !important;
-        margin-bottom: 100px !important;  /* Space for input and footer */
-    }
-
-    /* Adjust chat input position */
-    section[data-testid="stChatInput"] {
-        position: fixed !important;
-        bottom: 2.5rem !important;
-        background: transparent !important;
-        padding: 0.5rem !important;
-        width: 100% !important;
-    }
-
-    /* Add padding to messages */
-    .stChatMessage {
-        padding: 1rem !important;
-    }
-
-    /* Main container adjustments */
-    .main > .block-container {
-        padding-bottom: 0px !important;
-    }
-
-    /* Chat message container */
-    [data-testid="stChatMessageContainer"] {
-        height: calc(100vh - 180px) !important;
-        max-height: calc(100vh - 180px) !important;
-        overflow-y: auto !important;
-        margin-bottom: 120px !important;  /* Increased margin to prevent overlap */
-    }
-
-    /* Individual message styling */
-    .stChatMessage {
-        padding: 1rem !important;
-        margin-bottom: 1rem !important;
-        padding-bottom: 2rem !important;  /* Added extra padding at bottom of messages */
-    }
-
-    /* Chat input container */
-    section[data-testid="stChatInput"] {
-        position: fixed !important;
-        bottom: 50px !important;
-        left: 0 !important;
-        right: 0 !important;
-        background: var(--background-color) !important;
-        padding: 1rem !important;
-        z-index: 1000 !important;
-    }
-
-    /* Ensure proper stacking */
-    .stChatFloating {
-        bottom: 40px !important;
-    }
-
-
-    /* Footer adjustments */
-    footer {
-        position: fixed !important;
-        bottom: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        height: 40px !important;
-        z-index: 999 !important;
-    }
-
-    /* Regular message styling */
-    .stChatMessage {
-        margin-bottom: 20px !important;
-    }
-
-    /* Message content */
-    .stMarkdown {
-        overflow: visible !important;
-    }
-
-    /* Main chat container */
-    .stChatContainer {
-        margin-bottom: 100px !important;
-        overflow-y: auto !important;
-        height: auto !important;
-        min-height: 100vh !important;
-        padding: 0 20px !important;
-    }
-
-    /* Regular message styling */
-    .stChatMessage {
-        margin-bottom: 20px !important;
-    }
-
-    /* Message content */
-    .stMarkdown {
-        overflow: visible !important;
-    }
-
-    /* Remove padding from chat input container */
-    div[data-testid="stChatInputContainer"] {
-        padding: 0 !important;
-        margin: 0 !important;
-        width: 650px !important;
-        margin: 0 auto !important;
-    }
-
-    /* Ensure chat input matches width */
-    section[data-testid="stChatInput"] {
-        width: 650px !important;
-        margin: 0 auto !important;
-        padding: 0 !important;
-    }
-
-    /* Ensure content is scrollable */
-    .main .block-container {
-        overflow-y: auto !important;
-        height: auto !important;
-    }
-
-    /* Main chat container */
-    .stChatContainer {
-        margin-bottom: 100px !important;
-        overflow-y: auto !important;
-        height: auto !important;
-        min-height: 100vh !important;
-        padding: 0 20px !important;
-    }
-
-    /* Regular message styling */
-    .stChatMessage {
-        margin-bottom: 20px !important;
-        width: 650px !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-    }
-
-    /* Message content */
-    .stMarkdown {
-        overflow: visible !important;
-    }
-
-    /* Extra padding for assistant messages */
-    div[data-testid="stChatMessageContent"][aria-label="Chat message from assistant"] {
-        padding-bottom: 120px !important;
-    }
-
-    /* Remove all padding from bottom block container and its children */
-    div[data-testid="stBottomBlockContainer"],
-    div[data-testid="stVerticalBlockBorderWrapper"],
-    .st-emotion-cache-b95f0i,
-    .stVerticalBlock,
-    .stElementContainer {
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-
-    /* Ensure input container matches exact width */
-    div[data-testid="stBottomBlockContainer"] {
-        width: 650px !important;
-        margin: 0 auto !important;
-    }
-
-    /* Remove any flex spacing */
-    .stVerticalBlock {
-        gap: 0 !important;
-    }
-
-    /* Ensure chat message container aligns with input */
-    .stChatMessage {
-        margin-left: auto !important;
-        margin-right: auto !important;
-        box-sizing: border-box !important;
-    }
-
-    /* Ensure content is scrollable */
-    .main .block-container {
-        overflow-y: auto !important;
-        height: auto !important;
-    }
-</style>
-
-<div id="disclaimerModal" class="disclaimer-modal">
-    <div class="disclaimer-content">
-        <h2 style="color: #00b4ff;">Welcome to QSharp Quantum Computing</h2>
-        <p>This is a RAG (Retrieval-Augmented Generation) AI chat application designed to assist with Q# programming questions and explore quantum computing research.</p>
-        <p>The AI uses a curated knowledge base of Q# documentation, quantum computing papers, and best practices to provide accurate and helpful responses.</p>
-        <div style="margin-top: 2rem;">
-            <button 
-                style="
-                    background-color: #141c2b;
-                    color: #00b4ff;
-                    border: 1px solid #00b4ff;
-                    padding: 0.5rem 1rem;
-                    margin-top: 1rem;
-                    cursor: pointer;
-                    border-radius: 5px;
-                    display: inline-block;
-                "
-                onclick="document.querySelector('[data-testid=\\'stButton\\'] button').click();"
-            >
-                Got it!
-            </button>
-        </div>
-    </div>
-</div>
-
-<script>
-    function showDisclaimer() {
-        document.getElementById('disclaimerModal').style.display = 'block';
-    }
-    
-    function hideDisclaimer() {
-        document.getElementById('disclaimerModal').style.display = 'none';
-        localStorage.setItem('disclaimerAccepted', 'true');
-    }
-    
-    // Show disclaimer on first load
-    if (!localStorage.getItem('disclaimerAccepted')) {
-        showDisclaimer();
-    }
-    
-    // Handle disclaimer acceptance
-    document.querySelector('.disclaimer-content button').addEventListener('click', function() {
-        localStorage.setItem('disclaimerAccepted', 'true');
-        hideDisclaimer();
-    });
-</script>
+    /* Add viewport meta tag for mobile */
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 """, unsafe_allow_html=True)
 
 # Initialize clients
