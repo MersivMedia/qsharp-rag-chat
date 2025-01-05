@@ -614,12 +614,7 @@ st.markdown("""
 
 # Initialize clients
 anthropic_client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
-pc = Pinecone(
-    api_key=os.getenv("PINECONE_API_KEY"),
-    environment=os.getenv("PINECONE_ENVIRONMENT")
-)
-
-# Get Pinecone index
+pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
 index = pc.Index(os.getenv("PINECONE_INDEX_NAME"))
 
 def create_embedding(text: str) -> List[float]:
@@ -690,22 +685,28 @@ def search_all_namespaces(query: str, top_k: int = 5):
         
         # Search in each namespace
         for namespace in namespaces:
-            results = index.query(
-                vector=query_embedding,
-                top_k=top_k,
-                include_metadata=True,
-                namespace=namespace
-            )
-            
-            # Add namespace information to each result
-            for match in results.matches:
-                match.namespace = namespace
-            
-            all_results.extend(results.matches)
+            try:
+                results = index.query(
+                    vector=query_embedding,
+                    top_k=top_k,
+                    include_metadata=True,
+                    namespace=namespace
+                )
+                
+                # Add namespace information to each result
+                for match in results.matches:
+                    match.namespace = namespace
+                
+                all_results.extend(results.matches)
+            except Exception as ns_error:
+                st.warning(f"Error searching namespace {namespace}: {str(ns_error)}")
+                continue
         
         # Sort all results by score and take top_k
-        all_results.sort(key=attrgetter('score'), reverse=True)
-        return all_results[:top_k]
+        if all_results:
+            all_results.sort(key=attrgetter('score'), reverse=True)
+            return all_results[:top_k]
+        return []
     
     except Exception as e:
         st.error(f"Error searching vectors: {str(e)}")
