@@ -613,7 +613,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Initialize clients
-openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+openai_client = OpenAI()
 anthropic_client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 pc = Pinecone(
     api_key=os.getenv("PINECONE_API_KEY"),
