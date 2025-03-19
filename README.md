@@ -1,4 +1,4 @@
-# Phantom Directive Chat
+# QSharp Chat
 
 An AI-powered chat interface that allows users to query QSharp documents using RAG (Retrieval-Augmented Generation) technology. The application combines the power of Claude 3 Sonnet with vector search capabilities to provide accurate, sourced responses from official Qsharp documents.
 
